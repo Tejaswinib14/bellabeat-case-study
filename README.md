@@ -81,7 +81,7 @@ The dataset includes:
 ---
 
 ## 🚀 Conclusion
-This project demonstrates how data analysis can be used to understand user behavior and convert insights into actionable business strategies that improve both user experience and business performance.
+This project demonstrates how data analysis can be used to understand user behaviour and convert insights into actionable business strategies that improve both user experience and business performance.
 
 ---
 
