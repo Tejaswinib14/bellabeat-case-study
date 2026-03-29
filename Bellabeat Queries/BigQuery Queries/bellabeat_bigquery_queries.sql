@@ -9,7 +9,7 @@
 
 
 -- ================================================
--- 1. Total Unique Users
+-- 1. Total Unique Users for Activity data
 -- Purpose:Identify number of distinct users in dataset
 -- Insight: Helps understand dataset size and user coverage
 -- ================================================
@@ -75,7 +75,7 @@ ORDER BY activity_date;
 
 
 -- ================================================
--- 5. Activity Level Distribution
+-- 5. Activity Level Distribution (User days)
 -- Purpose: Calculate percentage of users in each activity category
 -- Insight: Helps understand overall user engagement levels
 -- ================================================
@@ -114,5 +114,53 @@ SELECT
 FROM classified
 GROUP BY activity_level
 ORDER BY percentage DESC;
+
+
+-- ================================================
+-- 6. Average Steps vs Calories burned
+-- Purpose: Analyze relationship between physical activity and calories burned
+-- Insight: Helps understand if higher steps lead to higher calorie burn
+-- ================================================
+SELECT
+  id,
+  activity_date,
+  ROUND(AVG(total_steps), 0) AS avg_steps,
+  ROUND(AVG(calories), 0) AS avg_calories
+FROM `corded-nature-467221-g0.bellabeat_fitness.daily_activity`
+GROUP BY id, activity_date
+ORDER BY id, activity_date;
+
+
+-- =====================================================
+-- 7. Average Sleep Duration by Activity Level
+-- Purpose: Analyze relationship between sleep duration and activity level
+-- Insight: Helps understand if active users have better sleep patterns
+-- =====================================================
+SELECT
+  s.id,
+  s.sleep_day,
+
+  -- Convert sleep minutes into hours for better readability
+  ROUND((s.total_minutes_asleep / 60.0), 1) AS sleep_hours,
+
+  a.total_steps,
+
+  -- Categorize activity level based on steps
+  CASE
+    WHEN total_steps < 5000 THEN 'Low Activity'
+    WHEN total_steps BETWEEN 5000 AND 10000 THEN 'Moderate Activity'
+    ELSE 'High Activity'
+  END AS activity_level
+
+FROM `corded-nature-467221-g0.bellabeat_fitness.sleep_day` s
+
+-- Join sleep and activity data on user and date
+LEFT JOIN `corded-nature-467221-g0.bellabeat_fitness.daily_activity` a
+  ON s.id = a.id 
+  AND s.sleep_day = a.activity_date
+
+ORDER BY sleep_hours DESC;
+
+---
 
 
