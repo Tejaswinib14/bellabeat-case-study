@@ -54,7 +54,7 @@ The dataset includes:
 
 ## 💡 Business Recommendations
 **Engagement Strategy**
-- Introduce personalised step goals based on user behaviour
+- Bellabeat can enhance its IVY Wellness Coach App by introducing personalised step goals based on user behaviour
 - Implement gamification features such as streaks and rewards
 - Send targeted notifications during peak activity hours
 - Improve weekend engagement through activity prompts
